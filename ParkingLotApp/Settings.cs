@@ -10,8 +10,11 @@ namespace ParkingLotApp
 {
     static class Settings
     {
-        private static Timer withdrawMoneyInterval;
+        private static uint intervalForLoggingToFile = 60000;
+        private static uint intervalForWithdrawMoney = 2000;
+
         private static Timer logToFile;
+        private static Timer withdrawMoney;
 
         public static DateTime Timeout { get; set; }
 
@@ -30,11 +33,15 @@ namespace ParkingLotApp
         //Coefficient of Penalty
         public static double Fine { get; set; } = 0.20;
 
+        //Parking Instance
         public static Parking Parking { get; set; } = Parking.Instance;
 
         static Settings()
         {
-            
+            logToFile = new Timer(new TimerCallback(Services.FileWriter.LogTransactionToFile), null, intervalForLoggingToFile, intervalForLoggingToFile);
+            withdrawMoney = new Timer(new TimerCallback(Parking.WithdrawMoneyForCars), null, intervalForWithdrawMoney, intervalForWithdrawMoney);
         }
+
+        
     }
 }

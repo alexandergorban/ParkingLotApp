@@ -12,7 +12,7 @@ namespace ParkingLotApp.Entities
         public List<Transaction> Transactions { get; }
         public decimal Balance { get; set; }
 
-        private static Parking instance;
+        private static Parking parking;
         private Parking()
         {
             Cars = new List<Car>();
@@ -23,12 +23,12 @@ namespace ParkingLotApp.Entities
         {
             get
             {
-                if (instance == null)
+                if (parking == null)
                 {
-                    instance = new Parking();
+                    parking = new Parking();
                 }
 
-                return instance;
+                return parking;
             }
         }
 
@@ -63,6 +63,26 @@ namespace ParkingLotApp.Entities
         public void DecreaseBalance(decimal value)
         {
             Balance -= value;
+        }
+
+        //Withdraw Money
+        public void WithdrawMoneyForCars(object obj)
+        {
+            foreach (Car car in Cars)
+            {
+                decimal sum = Settings.Dictionary[car.Type];
+
+                if ((car.Balance - sum) > 0)
+                {
+                    car.DecreaseBalance(sum);
+                    parking.IncreaseBalance(sum);
+                    parking.AddTransaction(new Transaction(car.Id, sum));
+                }
+                else
+                {
+                    sum *= new Decimal(Settings.Fine); //todo
+                }
+            }
         }
     }
 }
