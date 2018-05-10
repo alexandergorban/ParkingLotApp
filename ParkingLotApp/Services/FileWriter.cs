@@ -16,14 +16,14 @@ namespace ParkingLotApp.Services
         public static void LogTransactionToFile(object obj)
         {
             var lastTransactionsForWrite =
-                Settings.Parking.Transactions.Where<Transaction>(t => DateTime.Now - t.GetTime() < interval);
+                Settings.Parking.Transactions.Where<Transaction>(t => DateTime.Now - t.Time < interval);
 
             using (StreamWriter sw = new StreamWriter("transactions.log", true, System.Text.Encoding.Default))
             {
                 decimal accumulator = 0;
                 foreach (var transaction in lastTransactionsForWrite)
                 {
-                    accumulator += transaction.GetWithdrawMoney();
+                    accumulator += transaction.WithdrawMoney;
                 }
 
                 sw.WriteLine("DateTime: {0} Transaction Amount: {1}", DateTime.Now, accumulator);

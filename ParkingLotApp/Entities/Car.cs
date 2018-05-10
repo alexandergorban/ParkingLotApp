@@ -10,20 +10,13 @@ namespace ParkingLotApp.Entities
     {
         public uint Id { get; private set; }
         public decimal Balance { get; private set; }
-
-
-        private readonly CarType type;
-
-        public CarType GetType()
-        {
-            return type;
-        }
+        public CarType Type { get; }
 
         public Car(uint id, CarType type, decimal balance = 0)
         {
             Id = id;
             Balance = balance;
-            type = type;
+            Type = type;
         }
 
         public decimal IncreaseBalance(decimal value)
