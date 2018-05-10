@@ -8,8 +8,40 @@ namespace ParkingLotApp.Entities
 {
     class Transaction
     {
-        public ulong Id { get; set; }
-        public DateTime Time { get; set; }
-        public decimal WithdrawMoney { get; set; }
+        private readonly ulong id;
+
+        public ulong GetId()
+        {
+            return id;
+        }
+
+        private readonly DateTime time;
+
+        public DateTime GetTime()
+        {
+            return time;
+        }
+
+        private readonly uint carId;
+
+        public uint GetCarId()
+        {
+            return carId;
+        }
+
+        private readonly decimal withdrawMoney;
+
+        public decimal GetWithdrawMoney()
+        {
+            return withdrawMoney;
+        }
+
+        public Transaction(ulong id, uint carId, decimal withdrawMoney)
+        {
+            id = id;
+            time = DateTime.Now;
+            carId = carId;
+            withdrawMoney = withdrawMoney;
+        }
     }
 }
