@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace ParkingLotApp
 {
-    class Program
+    class Menu
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Start App");
-        }
     }
 }
