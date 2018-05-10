@@ -42,6 +42,9 @@ namespace ParkingLotApp
             withdrawMoney = new Timer(new TimerCallback(Parking.WithdrawMoneyForCars), null, intervalForWithdrawMoney, intervalForWithdrawMoney);
         }
 
-        
+        public static void DisplayTransactionHistory()
+        {
+
+        }
     }
 }

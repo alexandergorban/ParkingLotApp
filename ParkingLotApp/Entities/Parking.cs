@@ -8,6 +8,7 @@ namespace ParkingLotApp.Entities
 {
     class Parking
     {
+        public uint NumberParkingSpaces { get; set; } = 100;
         public List<Car> Cars { get; }
         public List<Transaction> Transactions { get; }
         public decimal Balance { get; set; }
@@ -34,7 +35,7 @@ namespace ParkingLotApp.Entities
 
         public void AddCar(Car car)
         {
-            if (Cars.Count < 100) // todo
+            if (Cars.Count < NumberParkingSpaces)
             {
                 Cars.Add(car);
             }
@@ -80,9 +81,15 @@ namespace ParkingLotApp.Entities
                 }
                 else
                 {
-                    sum *= new Decimal(Settings.Fine); //todo
+                    sum *= Convert.ToDecimal(Settings.Fine); //todo
                 }
             }
+        }
+
+        //The number of available parking spaces
+        public uint AvailableParkingSpaces()
+        {
+            return Convert.ToUInt32(NumberParkingSpaces - Cars.Count);
         }
     }
 }
