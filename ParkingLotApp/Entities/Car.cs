@@ -34,7 +34,7 @@ namespace ParkingLotApp.Entities
 
         public decimal DecreaseBalance(decimal value)
         {
-            Balance += value;
+            Balance -= value;
             return Balance;
         }
     }
