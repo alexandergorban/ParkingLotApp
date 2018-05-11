@@ -8,6 +8,15 @@ namespace ParkingLotApp.Entities
 {
     class Parking
     {
+        private static readonly Lazy<Parking> lazyParking = new Lazy<Parking>(() => new Parking());
+        public static Parking Instance
+        {
+            get
+            {
+                return lazyParking.Value;
+            }
+        }
+
         public uint NumberParkingSpaces { get; set; } = 100;
         public List<Car> Cars { get; }
         public List<Transaction> Transactions { get; }
@@ -18,19 +27,6 @@ namespace ParkingLotApp.Entities
         {
             Cars = new List<Car>();
             Transactions = new List<Transaction>();
-        }
-
-        public static Parking Instance
-        {
-            get
-            {
-                if (parking == null)
-                {
-                    parking = new Parking();
-                }
-
-                return parking;
-            }
         }
 
         public void AddCar(Car car)
@@ -87,9 +83,23 @@ namespace ParkingLotApp.Entities
         }
 
         //The number of available parking spaces
-        public uint AvailableParkingSpaces()
+        public uint GetNumberAvailableParkingSpaces()
         {
             return Convert.ToUInt32(NumberParkingSpaces - Cars.Count);
+        }
+
+        //The number of busy parking spaces
+        public uint GetNumberBusyParkingSpaces()
+        {
+            return Convert.ToUInt32(Cars.Count);
+        }
+
+        //Transaction history
+        public void GetLastTransactions()
+        {
+            TimeSpan interval = new TimeSpan(0, 1, 0);
+            var lastTransactionsForWrite =
+                Settings.Parking.Transactions.Where<Transaction>(t => DateTime.Now - t.Time < interval);
         }
     }
 }
