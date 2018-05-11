@@ -34,6 +34,7 @@ namespace ParkingLotApp
         //Coefficient of Penalty
         public static double Fine { get; set; } = 0.20;
 
+
         //Parking Instance
         public static Parking Parking { get; set; } = Parking.Instance;
 
@@ -46,13 +47,6 @@ namespace ParkingLotApp
             withdrawMoney = new Timer(new TimerCallback(Parking.WithdrawMoneyForCars), null, intervalForWithdrawMoney, intervalForWithdrawMoney);
         }
 
-        public static void DisplayTransactionHistory()
-        {
-            IEnumerable<Transaction> transactions = Parking.GetLastTransactions();
-            foreach (Transaction transaction in transactions)
-            {
-                Console.WriteLine(transaction);
-            }
-        }
+        
     }
 }

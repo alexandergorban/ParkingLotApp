@@ -82,6 +82,13 @@ namespace ParkingLotApp.Entities
             }
         }
 
+        //Refill car balance
+        public void IncreaseCarBalance(uint carId, decimal sum)
+        {
+            Car car = Cars.First<Car>(c => c.Id == carId);
+            car.IncreaseBalance(sum);
+        }
+
         //The number of available parking spaces
         public uint GetNumberAvailableParkingSpaces()
         {
