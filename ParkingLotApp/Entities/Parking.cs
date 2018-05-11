@@ -69,7 +69,7 @@ namespace ParkingLotApp.Entities
             {
                 decimal sum = Settings.Dictionary[car.Type];
 
-                if ((car.Balance - sum) > 0)
+                if (car.Balance > 0 && (car.Balance - sum) > 0)
                 {
                     car.DecreaseBalance(sum);
                     parking.IncreaseBalance(sum);
@@ -78,6 +78,7 @@ namespace ParkingLotApp.Entities
                 else
                 {
                     sum *= Convert.ToDecimal(Settings.Fine); //todo
+                    car.DecreaseBalance(sum);
                 }
             }
         }
