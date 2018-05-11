@@ -18,7 +18,7 @@ namespace ParkingLotApp.Services
             var lastTransactionsForWrite =
                 Settings.Parking.Transactions.Where<Transaction>(t => DateTime.Now - t.Time < interval);
 
-            using (StreamWriter sw = new StreamWriter("transactions.log", true, System.Text.Encoding.Default))
+            using (StreamWriter sw = new StreamWriter("Transactions.log", true, System.Text.Encoding.Default))
             {
                 decimal accumulator = 0;
                 foreach (var transaction in lastTransactionsForWrite)

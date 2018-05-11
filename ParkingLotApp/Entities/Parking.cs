@@ -109,5 +109,19 @@ namespace ParkingLotApp.Entities
 
             return lastTransactions;
         }
+
+        //The amount of money earned in the last minute
+        public decimal GetEarnedMoney()
+        {
+            IEnumerable <Transaction> lastTransactions = GetLastTransactions();
+
+            decimal sum = 0;
+            foreach (Transaction transaction in lastTransactions)
+            {
+                sum += transaction.WithdrawMoney;
+            }
+
+            return sum;
+        }
     }
 }
