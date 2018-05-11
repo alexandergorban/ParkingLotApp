@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ParkingLotApp.Entities;
+using ParkingLotApp.Services;
 
 namespace ParkingLotApp
 {
@@ -36,9 +37,12 @@ namespace ParkingLotApp
         //Parking Instance
         public static Parking Parking { get; set; } = Parking.Instance;
 
+        public static FileWriter FileWriter { get; private set; }
+
         static Settings()
         {
-            logToFile = new Timer(new TimerCallback(Services.FileWriter.LogTransactionToFile), null, intervalForLoggingToFile, intervalForLoggingToFile);
+            FileWriter = new FileWriter();
+            logToFile = new Timer(new TimerCallback(FileWriter.LogTransactionToFile), null, intervalForLoggingToFile, intervalForLoggingToFile);
             withdrawMoney = new Timer(new TimerCallback(Parking.WithdrawMoneyForCars), null, intervalForWithdrawMoney, intervalForWithdrawMoney);
         }
 

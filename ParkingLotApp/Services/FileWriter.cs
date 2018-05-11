@@ -8,12 +8,12 @@ using ParkingLotApp.Entities;
 
 namespace ParkingLotApp.Services
 {
-    static class FileWriter
+    class FileWriter
     {
         // Set interval for logging (1 min)
-        private static TimeSpan interval = new TimeSpan(0, 1, 0);
+        private TimeSpan interval = new TimeSpan(0, 1, 0);
 
-        public static void LogTransactionToFile(object obj)
+        public void LogTransactionToFile(object obj)
         {
             var lastTransactionsForWrite =
                 Settings.Parking.Transactions.Where<Transaction>(t => DateTime.Now - t.Time < interval);
