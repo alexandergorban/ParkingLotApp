@@ -95,11 +95,12 @@ namespace ParkingLotApp.Entities
         }
 
         //Transaction history
-        public void GetLastTransactions()
+        public IEnumerable<Transaction> GetLastTransactions()
         {
             TimeSpan interval = new TimeSpan(0, 1, 0);
-            var lastTransactionsForWrite =
-                Settings.Parking.Transactions.Where<Transaction>(t => DateTime.Now - t.Time < interval);
+            var lastTransactions = Transactions.Where<Transaction>(t => DateTime.Now - t.Time < interval);
+
+            return lastTransactions;
         }
     }
 }

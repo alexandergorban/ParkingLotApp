@@ -18,5 +18,10 @@ namespace ParkingLotApp.Entities
             CardId = carId;
             WithdrawMoney = withdrawMoney;
         }
+
+        public override string ToString()
+        {
+            return "Time: " + Time + " CardId: " + CardId + " Withdraw Money: " + WithdrawMoney;
+        }
     }
 }

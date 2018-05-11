@@ -48,7 +48,11 @@ namespace ParkingLotApp
 
         public static void DisplayTransactionHistory()
         {
-
+            IEnumerable<Transaction> transactions = Parking.GetLastTransactions();
+            foreach (Transaction transaction in transactions)
+            {
+                Console.WriteLine(transaction);
+            }
         }
     }
 }
