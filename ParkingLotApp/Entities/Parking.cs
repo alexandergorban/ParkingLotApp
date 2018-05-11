@@ -44,7 +44,16 @@ namespace ParkingLotApp.Entities
         public void RemoveCar(uint carId)
         {
             Car car = Cars.First<Car>(c => c.Id == carId);
-            Cars.Remove(car);
+
+            if (car.Balance >= 0)
+            {
+                Cars.Remove(car);
+            }
+            else
+            {
+                // todo
+            }
+            
         }
 
         public void AddTransaction(Transaction transaction)
@@ -123,6 +132,12 @@ namespace ParkingLotApp.Entities
             }
 
             return sum;
+        }
+
+        //Display transaction history for the last minute
+        public void DisplayTransactionHistory()
+        {
+
         }
     }
 }
