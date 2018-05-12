@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,8 @@ namespace ParkingLotApp
                               "4. 'pbusy' - Show number of busy places\n" +
                               "5. 'addcar' - Add car into parking\n" +
                               "6. 'delcar' - Remove car from parking (by id)\n" +
-                              "7. 'addbal' - Refill car's balance (by id)\n" +
-                              "8. 'carbal' - Show car's balance (by id)\n" +
+                              "7. 'addbal' - Refill car balance (by id)\n" +
+                              "8. 'carbal' - Show car balance (by id)\n" +
                               "9. 'trhist' - Show last minute transaction history\n" +
                               "10. 'prof' - Show parking profit for last minute\n" +
                               "11. 'trlog' - Output Transaction.log\n" +
@@ -158,16 +159,25 @@ namespace ParkingLotApp
             }
         }
 
+        //Display last minute transaction history
         public void TransactionHistory()
         {
+            IEnumerable<Transaction> transactions = Settings.Parking.GetLastTransactions();
 
+            Console.WriteLine("Last minute transaction history: ");
+            foreach (Transaction transaction in transactions)
+            {
+                Console.WriteLine(transaction);
+            }
         }
 
+        //Display parking profit for last minute
         public void ParkingProfit()
         {
-
+            Console.WriteLine("Parking profit for last minute: {0}", Settings.Parking.GetEarnedMoney());
         }
 
+        //Display Transction.log file
         public void DisplayTransactionLogFile()
         {
 
