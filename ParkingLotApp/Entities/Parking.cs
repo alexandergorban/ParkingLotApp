@@ -41,19 +41,26 @@ namespace ParkingLotApp.Entities
             }
         }
 
-        public void RemoveCar(uint carId)
+        public bool RemoveCar(uint carId)
         {
             Car car = Cars.First<Car>(c => c.Id == carId);
 
             if (car.Balance >= 0)
             {
                 Cars.Remove(car);
+                return true;
             }
             else
             {
-                // todo
+                return false;
             }
             
+        }
+
+        public bool IsCarExist(uint carId)
+        {
+            Car car = Cars.FirstOrDefault<Car>(c => c.Id == carId);
+            return car != null;
         }
 
         public void AddTransaction(Transaction transaction)
