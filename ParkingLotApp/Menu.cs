@@ -18,23 +18,93 @@ namespace ParkingLotApp
         public void AppCommands()
         {
             Console.WriteLine("App commands:\n" +
-                              "1. 'menu' - Show allowed commands for app\n" +
-                              "2. 'setting' - Setting app\n" +
-                              "3. 'pfree' - Show number of free places\n" +
-                              "4. 'pbusy' - Show number of busy places\n" +
-                              "5. 'addcar' - Add car into parking\n" +
-                              "6. 'delcar' - Remove car from parking (by id)\n" +
-                              "7. 'addbal' - Refill car balance (by id)\n" +
-                              "8. 'carbal' - Show car balance (by id)\n" +
-                              "9. 'trhist' - Show last minute transaction history\n" +
-                              "10. 'prof' - Show parking profit for last minute\n" +
-                              "11. 'trlog' - Output Transaction.log\n" +
-                              "12. 'exit' - Exit from app");
-        }
+                              "0. 'menu' - Show allowed commands for app\n" +
+                              "1. 'pfree' - Show number of free places\n" +
+                              "2. 'pbusy' - Show number of busy places\n" +
+                              "3. 'addcar' - Add car into parking\n" +
+                              "4. 'delcar' - Remove car from parking (by id)\n" +
+                              "5. 'addbal' - Refill car balance (by id)\n" +
+                              "6. 'carbal' - Show car balance (by id)\n" +
+                              "7. 'trhist' - Show last minute transaction history\n" +
+                              "8. 'prof' - Show parking profit\n" +
+                              "9. 'profmin' - Show parking profit for last minute\n" +
+                              "10. 'trlog' - Output Transaction.log\n" +
+                              "11. 'exit' - Exit from app\n" +
+                              "Enter command:");
 
-        public void SettingApp()
-        {
+            string command = Console.ReadLine();
 
+            switch (command)
+            {
+                case "1":
+                    NumberAvailableParkingSpaces();
+                    break;
+                case "pfree":
+                    NumberAvailableParkingSpaces();
+                    break;
+                case "2":
+                    NumberBusyParkingSpaces();
+                    break;
+                case "pbusy":
+                    NumberBusyParkingSpaces();
+                    break;
+                case "3":
+                    AddCar();
+                    break;
+                case "addcar":
+                    AddCar();
+                    break;
+                case "4":
+                    RemoveCar();
+                    break;
+                case "delcar":
+                    RemoveCar();
+                    break;
+                case "5":
+                    RefillCarBalance();
+                    break;
+                case "addbal":
+                    RefillCarBalance();
+                    break;
+                case "6":
+                    CarBalance();
+                    break;
+                case "carbal":
+                    CarBalance();
+                    break;
+                case "7":
+                    TransactionHistory();
+                    break;
+                case "trhist":
+                    TransactionHistory();
+                    break;
+                case "8":
+                    ParkingProfit();
+                    break;
+                case "prof":
+                    ParkingProfit();
+                    break;
+                case "9":
+                    ParkingProfit();
+                    break;
+                case "profmin":
+                    ParkingProfit();
+                    break;
+                case "10":
+                    DisplayTransactionLogFile();
+                    break;
+                case "trlog":
+                    DisplayTransactionLogFile();
+                    break;
+                case "11":
+
+                    break;
+                case "exit":
+
+                    break;
+                default:
+                    throw new Exception(); // todo
+            }
         }
 
         public void NumberAvailableParkingSpaces()
@@ -186,7 +256,9 @@ namespace ParkingLotApp
         //Display Transction.log file
         public void DisplayTransactionLogFile()
         {
-            Console.WriteLine("Transction.log file:\n {0}", Settings.FileReader.ReadTransactionFromFile());
+            Console.WriteLine("Transction.log file:\n {0}", Settings.ParkingService.FileReader.ReadTransactionFromFile());
         }
     }
 }
+
+
