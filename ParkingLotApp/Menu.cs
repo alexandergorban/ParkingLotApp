@@ -34,6 +34,8 @@ namespace ParkingLotApp
 
             string command = Console.ReadLine();
 
+            Console.Clear();
+
             switch (command)
             {
                 case "1":
@@ -105,6 +107,21 @@ namespace ParkingLotApp
                 default:
                     throw new Exception(); // todo
             }
+
+            BackToMenu();
+        }
+
+        public void BackToMenu()
+        {
+            int command = -1;
+            while (command != 0)
+            {
+                Console.WriteLine("Enter '0' to return to the main menu:");
+                command = Int32.Parse(Console.ReadLine());
+            }
+
+            Console.Clear();
+            AppCommands();
         }
 
         public void NumberAvailableParkingSpaces()
