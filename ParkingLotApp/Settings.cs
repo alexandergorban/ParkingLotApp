@@ -39,10 +39,13 @@ namespace ParkingLotApp
         public static Parking Parking { get; set; } = Parking.Instance;
 
         public static FileWriter FileWriter { get; private set; }
+        public static FileReader FileReader { get; private set; }
 
         static Settings()
         {
             FileWriter = new FileWriter();
+            FileReader = new FileReader();
+
             logToFile = new Timer(new TimerCallback(FileWriter.LogTransactionToFile), null, intervalForLoggingToFile, intervalForLoggingToFile);
             withdrawMoney = new Timer(new TimerCallback(Parking.WithdrawMoneyForCars), null, intervalForWithdrawMoney, intervalForWithdrawMoney);
         }

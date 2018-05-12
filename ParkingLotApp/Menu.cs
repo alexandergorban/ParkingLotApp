@@ -180,7 +180,7 @@ namespace ParkingLotApp
         //Display Transction.log file
         public void DisplayTransactionLogFile()
         {
-
+            Console.WriteLine("Transction.log file:\n {0}", Settings.FileReader.ReadTransactionFromFile());
         }
     }
 }
