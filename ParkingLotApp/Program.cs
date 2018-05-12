@@ -27,9 +27,8 @@ namespace ParkingLotApp
             }
 
 
-            Console.WriteLine("Start App");
-            Menu menu = new Menu();
-            menu.AppCommands();
+            //Start App
+            new Menu().StartApp();
         }
     }
 }

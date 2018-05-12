@@ -12,11 +12,11 @@ namespace ParkingLotApp
     class Menu
     {
 
-        public void BasicMenu()
+        public void StartApp()
         {
-
+            AppCommands();
         }
-        public void AppCommands()
+        private void AppCommands()
         {
             Console.WriteLine("App commands:\n" +
                               "1. 'pfree' - Show number of free places\n" +
@@ -109,7 +109,7 @@ namespace ParkingLotApp
             BackToMenu();
         }
 
-        public void BackToMenu()
+        private void BackToMenu()
         {
             int command = -1;
             while (command != 0)
@@ -144,19 +144,19 @@ namespace ParkingLotApp
             AppCommands();
         }
 
-        public void NumberAvailableParkingSpaces()
+        private void NumberAvailableParkingSpaces()
         {
             uint numberAvailableParkingSpaces = Settings.Parking.GetNumberAvailableParkingSpaces();
             Console.WriteLine("Number of available parking spaces: {0}", numberAvailableParkingSpaces);
         }
 
-        public void NumberBusyParkingSpaces()
+        private void NumberBusyParkingSpaces()
         {
             uint numberBusyParkingSpaces = Settings.Parking.GetNumberBusyParkingSpaces();
             Console.WriteLine("Number of available parking spaces: {0}", numberBusyParkingSpaces);
         }
 
-        public void AddCar()
+        private void AddCar()
         {
             Console.WriteLine("Adding the new car to the parking.");
             Console.WriteLine("Enter carId number: ");
@@ -175,7 +175,7 @@ namespace ParkingLotApp
                                   "1. 'motorcycle'\n" +
                                   "2. 'passenger'\n" +
                                   "3. 'truck'\n" +
-                                  "4. 'bus'\n");
+                                  "4. 'bus'");
                 string enteredType = Console.ReadLine();
                 CarType carType;
 
@@ -226,7 +226,7 @@ namespace ParkingLotApp
             }
         }
 
-        public void RemoveCar()
+        private void RemoveCar()
         {
             Console.WriteLine("To remove a car from the parking lot,");
             Console.WriteLine("enter carId number: ");
@@ -245,7 +245,7 @@ namespace ParkingLotApp
         }
 
         //Refill car balance
-        public void RefillCarBalance()
+        private void RefillCarBalance()
         {
             Console.WriteLine("To refill car balance, enter carId number: ");
             uint carId = UInt32.Parse(Console.ReadLine());
@@ -264,7 +264,7 @@ namespace ParkingLotApp
         }
 
         //Display car balance
-        public void CarBalance()
+        private void CarBalance()
         {
             Console.WriteLine("To display car balance, enter carId number: ");
             uint carId = UInt32.Parse(Console.ReadLine());
@@ -280,7 +280,7 @@ namespace ParkingLotApp
         }
 
         //Display last minute transaction history
-        public void TransactionHistory()
+        private void TransactionHistory()
         {
             IEnumerable<Transaction> transactions = Settings.Parking.GetLastTransactions(1);
 
@@ -292,19 +292,19 @@ namespace ParkingLotApp
         }
 
         //Display parking profit
-        public void ParkingProfit()
+        private void ParkingProfit()
         {
             Console.WriteLine("Parking profit: {0}", Settings.Parking.GetEarnedMoney());
         }
 
         //Display parking profit for last minute
-        public void LastMinParkingProfit()
+        private void LastMinParkingProfit()
         {
             Console.WriteLine("Parking profit for last minute: {0}", Settings.Parking.GetEarnedMoney(1));
         }
 
         //Display Transction.log file
-        public void DisplayTransactionLogFile()
+        private void DisplayTransactionLogFile()
         {
             Console.WriteLine("Transction.log file:\n {0}", Settings.ParkingService.FileReader.ReadTransactionFromFile());
         }

@@ -4,20 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ParkingLotApp.Exceptions;
 
 namespace ParkingLotApp.Entities
 {
     class Parking
     {
-        private static readonly Lazy<Parking> lazyParking = new Lazy<Parking>(() => new Parking());
-
-        public static Parking Instance
-        {
-            get
-            {
-                return lazyParking.Value;
-            }
-        }
+        private static readonly Lazy<Parking> LazyParking = new Lazy<Parking>(() => new Parking());
+        public static Parking Instance => LazyParking.Value;
 
         public uint NumberParkingSpaces { get; set; } = Settings.ParkingSpace;
         public List<Car> Cars { get; }
@@ -32,14 +26,28 @@ namespace ParkingLotApp.Entities
 
         public void AddCar(Car car)
         {
-            if (Cars.Count < NumberParkingSpaces)
+            try
             {
-                Cars.Add(car);
+                if (Cars.Count < NumberParkingSpaces)
+                {
+                    Cars.Add(car);
+                }
+                else
+                {
+                    throw new ParkingSpacesException("Parking is full");
+                }
             }
-            else
+            catch (ParkingSpacesException e)
             {
-                throw new Exception(); // todo
+                Console.WriteLine(e);
+                throw;
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
 
         public bool RemoveCar(uint carId)

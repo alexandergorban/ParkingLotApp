@@ -48,6 +48,7 @@
     <Compile Include="Entities\Parking.cs" />
     <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Exceptions\EnterDataErrorException.cs" />
+    <Compile Include="Exceptions\ParkingSpacesException.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
