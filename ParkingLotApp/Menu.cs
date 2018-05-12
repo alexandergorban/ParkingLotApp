@@ -118,12 +118,25 @@ namespace ParkingLotApp
 
                 try
                 {
-                    command = Int32.Parse(Console.ReadLine());
+                    string input = Console.ReadLine();
+
+                    if (input.Length !=1)
+                    {
+                        Console.WriteLine("Incorrent entered command");
+                        throw new CommandErrorException("Incorrent entered command");
+                    }
+
+                    command = Int32.Parse(input);
+                }
+                catch (CommandErrorException e)
+                {
+                    Console.WriteLine("Incorrent entered command");
+                    throw;
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Incorrent entered command");
-                    throw new CommandErrorException("Incorrent entered command", e);
+                    Console.WriteLine(e);
+                    throw;
                 }
                 
             }
@@ -194,7 +207,7 @@ namespace ParkingLotApp
                         carType = CarType.Bus;
                         break;
                     default:
-                        throw new EnterDataErrorException();
+                        throw new EnterDataErrorException("Incorrent entered data");
                 }
 
                 Console.WriteLine("Enter balance for car: ");
@@ -204,13 +217,13 @@ namespace ParkingLotApp
             }
             catch (EnterDataErrorException e)
             {
-                Console.WriteLine("Incorrent entered data");
-                throw new EnterDataErrorException("Incorrent entered data", e);
+                Console.WriteLine(e.Message);
+                throw;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw new Exception("App Error", e);
+                throw;
             }
         }
 

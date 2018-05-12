@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ParkingLotApp.Exceptions
 {
+    [Serializable]
     class EnterDataErrorException : Exception
     {
         public EnterDataErrorException()

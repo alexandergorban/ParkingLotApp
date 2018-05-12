@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ParkingLotApp
 {
+    [Serializable]
     class CommandErrorException : Exception
     {
         public CommandErrorException()
