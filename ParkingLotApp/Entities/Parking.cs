@@ -68,12 +68,12 @@ namespace ParkingLotApp.Entities
             Transactions.Add(transaction);
         }
 
-        public void IncreaseBalance(decimal value)
+        private void IncreaseBalance(decimal value)
         {
             Balance += value;
         }
 
-        public void DecreaseBalance(decimal value)
+        private void DecreaseBalance(decimal value)
         {
             Balance -= value;
         }
@@ -104,6 +104,13 @@ namespace ParkingLotApp.Entities
         {
             Car car = Cars.First<Car>(c => c.Id == carId);
             car.IncreaseBalance(sum);
+        }
+
+        //Get car balance
+        public decimal GetCarBalance(uint carId)
+        {
+            Car car = Cars.First<Car>(c => c.Id == carId);
+            return car.Balance;
         }
 
         //The number of available parking spaces

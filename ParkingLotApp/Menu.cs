@@ -123,14 +123,39 @@ namespace ParkingLotApp
             }
         }
 
-        public void RefillCarsBalance()
+        //Refill car balance
+        public void RefillCarBalance()
         {
+            Console.WriteLine("To refill car balance, enter carId number: ");
+            uint carId = UInt32.Parse(Console.ReadLine());
+            Console.WriteLine("Enter amount: ");
+            decimal sum = Decimal.Parse(Console.ReadLine());
 
+            if (Settings.Parking.IsCarExist(carId))
+            {
+                Settings.Parking.IncreaseCarBalance(carId, sum);
+                Console.WriteLine("The car balance has refilled.");
+            }
+            else
+            {
+                Console.WriteLine("The car is not parked.");
+            }
         }
 
-        public void CarsBalance()
+        //Display car balance
+        public void CarBalance()
         {
+            Console.WriteLine("To display car balance, enter carId number: ");
+            uint carId = UInt32.Parse(Console.ReadLine());
 
+            if (Settings.Parking.IsCarExist(carId))
+            {
+                Console.WriteLine("The car balance: {0}", Settings.Parking.GetCarBalance(carId));
+            }
+            else
+            {
+                Console.WriteLine("The car is not parked.");
+            }
         }
 
         public void TransactionHistory()
