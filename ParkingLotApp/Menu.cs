@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ParkingLotApp.Entities;
+using ParkingLotApp.Exceptions;
 
 namespace ParkingLotApp
 {
@@ -114,7 +115,17 @@ namespace ParkingLotApp
             while (command != 0)
             {
                 Console.WriteLine("Enter '0' to return to the main menu:");
-                command = Int32.Parse(Console.ReadLine());
+
+                try
+                {
+                    command = Int32.Parse(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Incorrent entered command");
+                    throw new CommandErrorException("Incorrent entered command", e);
+                }
+                
             }
 
             Console.Clear();
@@ -137,57 +148,70 @@ namespace ParkingLotApp
         {
             Console.WriteLine("Adding the new car to the parking.");
             Console.WriteLine("Enter carId number: ");
-            uint carId = UInt32.Parse(Console.ReadLine());
-
-            while (Settings.Parking.IsCarExist(carId))
+            try
             {
-                Console.WriteLine("A car with this number is already parked.");
-                Console.WriteLine("Enter carId number: ");
-                carId = UInt32.Parse(Console.ReadLine());
+                uint carId = UInt32.Parse(Console.ReadLine());
+
+                while (Settings.Parking.IsCarExist(carId))
+                {
+                    Console.WriteLine("A car with this number is already parked.");
+                    Console.WriteLine("Enter carId number: ");
+                    carId = UInt32.Parse(Console.ReadLine());
+                }
+
+                Console.WriteLine("Enter type of car (leter or number):\n" +
+                                  "1. 'motorcycle'\n" +
+                                  "2. 'passenger'\n" +
+                                  "3. 'truck'\n" +
+                                  "4. 'bus'\n");
+                string enteredType = Console.ReadLine();
+                CarType carType;
+
+                switch (enteredType)
+                {
+                    case "1":
+                        carType = CarType.Motorcycle;
+                        break;
+                    case "motorcycle":
+                        carType = CarType.Motorcycle;
+                        break;
+                    case "2":
+                        carType = CarType.Passenger;
+                        break;
+                    case "passenger":
+                        carType = CarType.Passenger;
+                        break;
+                    case "3":
+                        carType = CarType.Truck;
+                        break;
+                    case "truck":
+                        carType = CarType.Truck;
+                        break;
+                    case "4":
+                        carType = CarType.Bus;
+                        break;
+                    case "bus":
+                        carType = CarType.Bus;
+                        break;
+                    default:
+                        throw new EnterDataErrorException();
+                }
+
+                Console.WriteLine("Enter balance for car: ");
+                decimal carBalance = UInt32.Parse(Console.ReadLine());
+
+                Settings.Parking.AddCar(new Car(carId, carType, carBalance));
             }
-
-            Console.WriteLine("Enter type of car (leter or number):\n" +
-                              "1. 'motorcycle'\n" +
-                              "2. 'passenger'\n" +
-                              "3. 'truck'\n" +
-                              "4. 'bus'\n");
-            string enteredType = Console.ReadLine();
-            CarType carType;
-
-            switch (enteredType)
+            catch (EnterDataErrorException e)
             {
-                case "1":
-                    carType = CarType.Motorcycle;
-                    break;
-                case "motorcycle":
-                    carType = CarType.Motorcycle;
-                    break;
-                case "2":
-                    carType = CarType.Passenger;
-                    break;
-                case "passenger":
-                    carType = CarType.Passenger;
-                    break;
-                case "3":
-                    carType = CarType.Truck;
-                    break;
-                case "truck":
-                    carType = CarType.Truck;
-                    break;
-                case "4":
-                    carType = CarType.Bus;
-                    break;
-                case "bus":
-                    carType = CarType.Bus;
-                    break;
-                default:
-                    throw new Exception(); // todo
+                Console.WriteLine("Incorrent entered data");
+                throw new EnterDataErrorException("Incorrent entered data", e);
             }
-
-            Console.WriteLine("Enter balance for car: ");
-            decimal carBalance = UInt32.Parse(Console.ReadLine());
-
-            Settings.Parking.AddCar(new Car(carId, carType, carBalance));
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception("App Error", e);
+            }
         }
 
         public void RemoveCar()

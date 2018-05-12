@@ -42,10 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\CommandErrorException.cs" />
     <Compile Include="Entities\Car.cs" />
     <Compile Include="Entities\CarType.cs" />
     <Compile Include="Entities\Parking.cs" />
     <Compile Include="Entities\Transaction.cs" />
+    <Compile Include="Exceptions\EnterDataErrorException.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
