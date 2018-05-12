@@ -162,7 +162,7 @@ namespace ParkingLotApp
         //Display last minute transaction history
         public void TransactionHistory()
         {
-            IEnumerable<Transaction> transactions = Settings.Parking.GetLastTransactions();
+            IEnumerable<Transaction> transactions = Settings.Parking.GetLastTransactions(1);
 
             Console.WriteLine("Last minute transaction history: ");
             foreach (Transaction transaction in transactions)
@@ -171,10 +171,16 @@ namespace ParkingLotApp
             }
         }
 
-        //Display parking profit for last minute
+        //Display parking profit
         public void ParkingProfit()
         {
-            Console.WriteLine("Parking profit for last minute: {0}", Settings.Parking.GetEarnedMoney());
+            Console.WriteLine("Parking profit: {0}", Settings.Parking.GetEarnedMoney());
+        }
+
+        //Display parking profit for last minute
+        public void LastMinParkingProfit()
+        {
+            Console.WriteLine("Parking profit for last minute: {0}", Settings.Parking.GetEarnedMoney(1));
         }
 
         //Display Transction.log file

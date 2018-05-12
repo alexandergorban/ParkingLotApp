@@ -126,18 +126,25 @@ namespace ParkingLotApp.Entities
         }
 
         //Transaction history
-        public IEnumerable<Transaction> GetLastTransactions()
+        public IEnumerable<Transaction> GetLastTransactions(int minutes)
         {
-            TimeSpan interval = new TimeSpan(0, 1, 0);
-            var lastTransactions = Transactions.Where<Transaction>(t => DateTime.Now - t.Time < interval);
+            if (minutes == 0)
+            {
+                return Transactions;
+            }
+            else
+            {
+                TimeSpan interval = new TimeSpan(0, minutes, 0);
+                var lastTransactions = Transactions.Where<Transaction>(t => DateTime.Now - t.Time < interval);
 
-            return lastTransactions;
+                return lastTransactions;
+            }
         }
 
-        //The amount of money earned in the last minute
-        public decimal GetEarnedMoney()
+        //The amount of earned money
+        public decimal GetEarnedMoney(int minutes = 0)
         {
-            IEnumerable <Transaction> lastTransactions = GetLastTransactions();
+            IEnumerable <Transaction> lastTransactions = GetLastTransactions(minutes);
 
             decimal sum = 0;
             foreach (Transaction transaction in lastTransactions)
@@ -146,12 +153,6 @@ namespace ParkingLotApp.Entities
             }
 
             return sum;
-        }
-
-        //Display transaction history for the last minute
-        public void DisplayTransactionHistory()
-        {
-
         }
     }
 }

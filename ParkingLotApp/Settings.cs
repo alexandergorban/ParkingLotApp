@@ -38,6 +38,7 @@ namespace ParkingLotApp
         //Parking Instance
         public static Parking Parking { get; set; } = Parking.Instance;
 
+        //Services
         public static FileWriter FileWriter { get; private set; }
         public static FileReader FileReader { get; private set; }
 
