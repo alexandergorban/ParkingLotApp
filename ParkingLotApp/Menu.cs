@@ -122,7 +122,6 @@ namespace ParkingLotApp
 
                     if (input.Length !=1)
                     {
-                        Console.WriteLine("Incorrent entered command");
                         throw new CommandErrorException("Incorrent entered command");
                     }
 
@@ -130,7 +129,7 @@ namespace ParkingLotApp
                 }
                 catch (CommandErrorException e)
                 {
-                    Console.WriteLine("Incorrent entered command");
+                    Console.WriteLine(e.Message);
                     throw;
                 }
                 catch (Exception e)
