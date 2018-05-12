@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ParkingLotApp.Entities
@@ -9,6 +10,7 @@ namespace ParkingLotApp.Entities
     class Parking
     {
         private static readonly Lazy<Parking> lazyParking = new Lazy<Parking>(() => new Parking());
+
         public static Parking Instance
         {
             get
@@ -17,12 +19,11 @@ namespace ParkingLotApp.Entities
             }
         }
 
-        public uint NumberParkingSpaces { get; set; } = 100;
+        public uint NumberParkingSpaces { get; set; } = Settings.ParkingSpace;
         public List<Car> Cars { get; }
         public List<Transaction> Transactions { get; }
         public decimal Balance { get; set; }
 
-        private static Parking parking;
         private Parking()
         {
             Cars = new List<Car>();
@@ -88,8 +89,8 @@ namespace ParkingLotApp.Entities
                 if (car.Balance > 0 && (car.Balance - sum) > 0)
                 {
                     car.DecreaseBalance(sum);
-                    parking.IncreaseBalance(sum);
-                    parking.AddTransaction(new Transaction(car.Id, sum));
+                    IncreaseBalance(sum);
+                    AddTransaction(new Transaction(car.Id, sum));
                 }
                 else
                 {
