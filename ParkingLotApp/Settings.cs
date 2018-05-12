@@ -11,8 +11,8 @@ namespace ParkingLotApp
 {
     static class Settings
     {
-        private static uint intervalForLoggingToFile = 60000; // 60 sec
-        private static uint intervalForWithdrawMoney = 2000; // 2 sec
+        public static uint intervalForLoggingToFile = 60000; // 60 sec
+        public static uint intervalForWithdrawMoney = 2000; // 2 sec
 
         public static DateTime Timeout { get; set; }
 
@@ -36,19 +36,11 @@ namespace ParkingLotApp
         public static Parking Parking { get; set; } = Parking.Instance;
 
         //Services
-        public static FileWriter FileWriter { get; private set; }
-        public static FileReader FileReader { get; private set; }
-
-        private static Timer logToFile;
-        private static Timer withdrawMoney;
+        public static ParkingService ParkingService { get; private set; }
 
         static Settings()
         {
-            FileWriter = new FileWriter();
-            FileReader = new FileReader();
-
-            logToFile = new Timer(new TimerCallback(FileWriter.LogTransactionToFile), null, intervalForLoggingToFile, intervalForLoggingToFile);
-            withdrawMoney = new Timer(new TimerCallback(Parking.WithdrawMoneyForCars), null, intervalForWithdrawMoney, intervalForWithdrawMoney);
+            ParkingService = new ParkingService();
         }
     }
 }
