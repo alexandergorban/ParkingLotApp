@@ -12,7 +12,7 @@ namespace ParkingLotApp
     static class Settings
     {
         public static uint intervalForLoggingToFile = 60000; // 60 sec
-        public static uint intervalForWithdrawMoney = 2000; // 2 sec
+        public static uint intervalForWithdrawMoney = 5000; // 5 sec
 
         public static DateTime Timeout { get; set; }
 

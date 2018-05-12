@@ -18,7 +18,6 @@ namespace ParkingLotApp
         public void AppCommands()
         {
             Console.WriteLine("App commands:\n" +
-                              "0. 'menu' - Show allowed commands for app\n" +
                               "1. 'pfree' - Show number of free places\n" +
                               "2. 'pbusy' - Show number of busy places\n" +
                               "3. 'addcar' - Add car into parking\n" +
@@ -99,11 +98,9 @@ namespace ParkingLotApp
                     DisplayTransactionLogFile();
                     break;
                 case "11":
-
-                    break;
+                    return;
                 case "exit":
-
-                    break;
+                    return;
                 default:
                     throw new Exception(); // todo
             }
