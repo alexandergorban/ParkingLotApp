@@ -12,7 +12,7 @@ namespace ParkingLotApp.Services
     {
         public string ReadTransactionFromFile()
         {
-            using (StreamReader sr = new StreamReader("Transactions.log", System.Text.Encoding.Default))
+            using (StreamReader sr = new StreamReader(Settings.loggingFileName, System.Text.Encoding.Default))
             {
                 StringBuilder accumulator = new StringBuilder();
                 string line;

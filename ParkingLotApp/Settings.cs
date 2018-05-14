@@ -11,6 +11,7 @@ namespace ParkingLotApp
 {
     static class Settings
     {
+        public static string loggingFileName = "Transactions.log";
         public static uint intervalForLoggingToFile = 60000; // 60 sec
         public static uint intervalForWithdrawMoney = 5000; // 5 sec
 
